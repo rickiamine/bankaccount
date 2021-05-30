@@ -12,10 +12,11 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class AccountShould {
 
-    private Account account;
+    private Account account = new Account();
 
     @Mock
     private Statement statement;
+
 
     @Test
     public void makeDeposit() {
