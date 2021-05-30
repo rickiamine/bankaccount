@@ -1,5 +1,6 @@
 package com.kata.bankaccount;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,6 +42,16 @@ public class AccountShould {
         String date = Instant.now().toString();
         account.withdrawal(amount,date);
         verify(statement).addNewBalance(new Operation(Operation.OperationType.WITHDRAWAL,amount,date),-amount);
+    }
+
+    @Test(expected=InsufficientBalanceException.class)
+    public void throwExceptionWhenInsufficientBalance() throws InsufficientBalanceException {
+        int amount = 100;
+        int amountWithdrawal = 200;
+        String date = Instant.now().toString();
+        account.deposit(amount,date);
+        account.withdrawal(amountWithdrawal,date);
+        Assert.fail();
     }
 
     @Test
