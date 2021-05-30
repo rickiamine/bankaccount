@@ -23,5 +23,6 @@ public class Account {
     }
 
     public void printStatement(AccountStatementPrinter printer) {
+        this.statement.exportToPrint(printer);
     }
 }
