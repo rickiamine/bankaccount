@@ -32,4 +32,13 @@ public class StatementShould {
         verify(printer).println(new BalanceLine(new Operation(Operation.OperationType.DEPOSIT,amount,date),amount));
     }
 
+    @Test
+    public void printWithdrawalOperation() {
+        int amount= 100;
+        String date = Instant.now().toString();
+        statement.addNewBalance(new Operation(Operation.OperationType.WITHDRAWAL,amount,date),amount);
+        statement.exportToPrint(printer);
+        verify(printer).println(new BalanceLine(new Operation(Operation.OperationType.WITHDRAWAL,amount,date),amount));
+    }
+
 }
