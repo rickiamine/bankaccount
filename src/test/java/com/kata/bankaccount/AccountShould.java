@@ -1,5 +1,6 @@
 package com.kata.bankaccount;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -12,10 +13,15 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class AccountShould {
 
-    private Account account = new Account();
+    private Account account;
 
     @Mock
     private Statement statement;
+
+    @Before
+    public void init() {
+        account = new Account(statement);
+    }
 
 
     @Test
