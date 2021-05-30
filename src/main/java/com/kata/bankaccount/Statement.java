@@ -8,8 +8,8 @@ public class Statement {
     private List<BalanceLine > balanceLines = new LinkedList<>();
 
 
-    public void addNewBalance(Operation deposit, int balance) {
-        throw new UnsupportedOperationException();
+    public void addNewBalance(Operation operation, int balanceAfterDeposit) {
+        this.balanceLines.add(new BalanceLine(operation,balanceAfterDeposit));
     }
 
     public void exportToPrint(AccountStatementPrinter printer) {
