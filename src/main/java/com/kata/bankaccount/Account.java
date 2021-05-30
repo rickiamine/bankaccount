@@ -11,8 +11,14 @@ public class Account {
     }
 
     public void deposit(int amount, String date) {
-        Operation operation = new Operation("deposit",amount,date);
+        Operation operation = new Operation(Operation.OperationType.DEPOSIT,amount,date);
         this.balance = this.balance+amount;
+        statement.addNewBalance(operation,balance);
+    }
+
+    public void Owithdrawal(int amount, String date) {
+        Operation operation = new Operation(Operation.OperationType.WITHDRAWAL,amount,date);
+        this.balance = this.balance-amount;
         statement.addNewBalance(operation,balance);
     }
 }

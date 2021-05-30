@@ -29,6 +29,14 @@ public class AccountShould {
         int amount = 100;
         String date = Instant.now().toString();
         account.deposit(amount,date);
-        verify(statement).addNewBalance(new Operation("deposit",amount,date),amount);
+        verify(statement).addNewBalance(new Operation(Operation.OperationType.DEPOSIT,amount,date),amount);
+    }
+
+    @Test
+    public void makeWithdrawal() {
+        int amount = 100;
+        String date = Instant.now().toString();
+        account.withdrawal(amount,date);
+        verify(statement).addNewBalance(new Operation(Operation.OperationType.WITHDRAWAL,amount,date),-amount);
     }
 }
