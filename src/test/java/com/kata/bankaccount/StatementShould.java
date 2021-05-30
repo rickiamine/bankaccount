@@ -3,7 +3,9 @@ package com.kata.bankaccount;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InOrder;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.time.Instant;
@@ -39,6 +41,20 @@ public class StatementShould {
         statement.addNewBalance(new Operation(Operation.OperationType.WITHDRAWAL,amount,date),amount);
         statement.exportToPrint(printer);
         verify(printer).println(new BalanceLine(new Operation(Operation.OperationType.WITHDRAWAL,amount,date),amount));
+    }
+
+    @Test
+    public void printManyOperation() {
+        int amount= 100;
+        int amount2= 200;
+        String date = Instant.now().toString();
+        statement.addNewBalance(new Operation(Operation.OperationType.DEPOSIT,amount,date),amount);
+        statement.addNewBalance(new Operation(Operation.OperationType.DEPOSIT,amount2,date),amount+amount2);
+        statement.exportToPrint(printer);
+
+        InOrder inOrder = Mockito.inOrder(printer);
+        inOrder.verify(printer).println(new BalanceLine(new Operation(Operation.OperationType.DEPOSIT,amount,date),amount));
+        inOrder.verify(printer).println(new BalanceLine(new Operation(Operation.OperationType.DEPOSIT,amount2,date),amount+amount2));
     }
 
 }
