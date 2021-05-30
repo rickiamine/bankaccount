@@ -8,11 +8,11 @@ public class Statement {
     private List<BalanceLine > balanceLines = new LinkedList<>();
 
 
-    public void addNewBalance(Operation operation, int balanceAfterOperation) {
-        this.balanceLines.add(new BalanceLine(operation,balanceAfterOperation));
+    public void addNewBalance(Operation deposit, int balance) {
+        throw new UnsupportedOperationException();
     }
 
     public void exportToPrint(AccountStatementPrinter printer) {
-        throw new UnsupportedOperationException();
+        balanceLines.forEach(balanceLine ->printer.println(balanceLine));
     }
 }
