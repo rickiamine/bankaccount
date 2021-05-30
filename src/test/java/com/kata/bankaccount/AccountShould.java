@@ -37,11 +37,14 @@ public class AccountShould {
     }
 
     @Test
-    public void makeWithdrawal() {
+    public void makeWithdrawal() throws InsufficientBalanceException {
         int amount = 100;
+        int amountDeposit = 200;
         String date = Instant.now().toString();
+        account.deposit(amountDeposit,date);
+
         account.withdrawal(amount,date);
-        verify(statement).addNewBalance(new Operation(Operation.OperationType.WITHDRAWAL,amount,date),-amount);
+        verify(statement).addNewBalance(new Operation(Operation.OperationType.WITHDRAWAL,amount,date),amountDeposit-amount);
     }
 
     @Test(expected=InsufficientBalanceException.class)
@@ -50,6 +53,7 @@ public class AccountShould {
         int amountWithdrawal = 200;
         String date = Instant.now().toString();
         account.deposit(amount,date);
+
         account.withdrawal(amountWithdrawal,date);
         Assert.fail();
     }

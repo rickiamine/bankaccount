@@ -7,7 +7,7 @@ import java.time.Instant;
 @SpringBootApplication
 public class BankaccountApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InsufficientBalanceException {
 		Account account = new Account(new Statement());
 		AccountStatementPrinter printer = new AccountStatementPrinter();
 

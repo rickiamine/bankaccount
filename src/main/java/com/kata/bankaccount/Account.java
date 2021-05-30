@@ -16,7 +16,8 @@ public class Account {
         statement.addNewBalance(operation,balance);
     }
 
-    public void withdrawal(int amount, String date) {
+    public void withdrawal(int amount, String date) throws InsufficientBalanceException {
+        assertSufficientBalance(amount);
         Operation operation = new Operation(Operation.OperationType.WITHDRAWAL,amount,date);
         this.balance = this.balance-amount;
         statement.addNewBalance(operation,balance);
@@ -24,5 +25,11 @@ public class Account {
 
     public void printStatement(AccountStatementPrinter printer) {
         this.statement.exportToPrint(printer);
+    }
+
+    private void assertSufficientBalance(int amount) throws InsufficientBalanceException{
+        if(this.balance-amount<0) {
+            throw new InsufficientBalanceException();
+        }
     }
 }
