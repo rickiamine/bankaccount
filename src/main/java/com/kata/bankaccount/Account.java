@@ -16,9 +16,12 @@ public class Account {
         statement.addNewBalance(operation,balance);
     }
 
-    public void Owithdrawal(int amount, String date) {
+    public void withdrawal(int amount, String date) {
         Operation operation = new Operation(Operation.OperationType.WITHDRAWAL,amount,date);
         this.balance = this.balance-amount;
         statement.addNewBalance(operation,balance);
+    }
+
+    public void printStatement(AccountStatementPrinter printer) {
     }
 }

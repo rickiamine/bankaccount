@@ -18,6 +18,9 @@ public class AccountShould {
     @Mock
     private Statement statement;
 
+    @Mock
+    AccountStatementPrinter printer;
+
     @Before
     public void init() {
         account = new Account(statement);
@@ -38,5 +41,11 @@ public class AccountShould {
         String date = Instant.now().toString();
         account.withdrawal(amount,date);
         verify(statement).addNewBalance(new Operation(Operation.OperationType.WITHDRAWAL,amount,date),-amount);
+    }
+
+    @Test
+    public void printAccountStatement() {
+        account.printStatement(printer);
+        verify(statement).exportToPrint(printer);
     }
 }
