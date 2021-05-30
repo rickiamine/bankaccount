@@ -11,6 +11,14 @@ public class BalanceLine {
         this.balanceAfterOperation = balanceAfterOperation;
     }
 
+    public Operation getOperation() {
+        return operation;
+    }
+
+    public int getBalanceAfterOperation() {
+        return balanceAfterOperation;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

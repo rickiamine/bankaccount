@@ -14,6 +14,18 @@ public class Operation {
         this.date = date;
     }
 
+    public OperationType getName() {
+        return name;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
